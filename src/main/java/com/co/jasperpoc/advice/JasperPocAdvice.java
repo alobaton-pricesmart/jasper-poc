@@ -26,6 +26,8 @@ public class JasperPocAdvice {
 		error.setMessage(ex.getMessage());
 		error.addError(ex.getCause().toString());
 
+		ex.printStackTrace();
+
 		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
 	}
 }

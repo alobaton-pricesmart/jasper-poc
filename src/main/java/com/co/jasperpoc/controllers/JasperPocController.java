@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.cojasperpoc.controllers;
+package com.co.jasperpoc.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +22,7 @@ public class JasperPocController {
 	@Autowired
 	private JasperPocService service;
 
-	@RequestMapping("/hello-world/{name}")
+	@RequestMapping("/hello/{name}")
 	public void hello(@PathVariable String name) throws JRException {
 		service.hello(name);
 	}
