@@ -3,7 +3,10 @@
  */
 package com.co.jasperpoc.service;
 
+import java.io.IOException;
+
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  * @author alobaton
@@ -11,6 +14,6 @@ import net.sf.jasperreports.engine.JRException;
  */
 public interface JasperPocService {
 
-	public void hello(String name) throws JRException;
+	public JasperPrint hello(String name) throws JRException, IOException;
 
 }

@@ -3,6 +3,9 @@
  */
 package com.co.jasperpoc.jasper;
 
+import java.io.IOException;
+import java.io.OutputStream;
+
 import org.springframework.stereotype.Component;
 
 import net.sf.jasperreports.engine.JRException;
@@ -24,12 +27,14 @@ public class JasperExporter {
 	 * 
 	 * @param filename The filename
 	 * @param content  The file content
+	 * @throws IOException
+	 * @throws JRException
 	 */
-	public void exportPDF(String filename, JasperPrint content) {
+	public void exportPDF(JasperPrint content, OutputStream outputStream) throws IOException, JRException {
 		JRPdfExporter exporter = new JRPdfExporter();
 
 		exporter.setExporterInput(new SimpleExporterInput(content));
-		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(String.format("%s.pdf", filename)));
+		exporter.setExporterOutput(new SimpleOutputStreamExporterOutput(outputStream));
 
 		SimplePdfReportConfiguration reportConfig = new SimplePdfReportConfiguration();
 		reportConfig.setSizePageToContent(Boolean.TRUE);
@@ -41,11 +46,7 @@ public class JasperExporter {
 		exporter.setConfiguration(reportConfig);
 		exporter.setConfiguration(exportConfig);
 
-		try {
-			exporter.exportReport();
-		} catch (JRException e) {
-			e.printStackTrace();
-		}
+		exporter.exportReport();
 	}
 
 }

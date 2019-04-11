@@ -3,15 +3,14 @@
  */
 package com.co.jasperpoc.service.impl;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.co.jasperpoc.jasper.JasperExporter;
 import com.co.jasperpoc.service.JasperPocService;
 
 import net.sf.jasperreports.engine.JRException;
@@ -36,11 +35,8 @@ public class JasperPocServiceImpl implements JasperPocService {
 	@Value("${reports.hello.title}")
 	private String title;
 
-	@Autowired
-	private JasperExporter exporter;
-
 	@Override
-	public void hello(String name) throws JRException {
+	public JasperPrint hello(String name) throws JRException, IOException {
 		InputStream stream = getClass().getResourceAsStream(String.format("%s.jrxml", fileName));
 		JasperReport report = JasperCompileManager.compileReport(stream);
 
@@ -48,9 +44,7 @@ public class JasperPocServiceImpl implements JasperPocService {
 		parameters.put(TITLE, title);
 		parameters.put(NAME, name);
 
-		JasperPrint content = JasperFillManager.fillReport(report, parameters);
-
-		exporter.exportPDF(fileName, content);
+		return JasperFillManager.fillReport(report, parameters);
 	}
 
 }
