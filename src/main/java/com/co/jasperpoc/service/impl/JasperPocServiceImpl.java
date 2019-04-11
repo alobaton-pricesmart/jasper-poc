@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.co.jasperpoc.service.JasperPocService;
 
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -44,7 +45,9 @@ public class JasperPocServiceImpl implements JasperPocService {
 		parameters.put(TITLE, title);
 		parameters.put(NAME, name);
 
-		return JasperFillManager.fillReport(report, parameters);
+		// JasperFillmanager.fillReport need a datasource to work correctly if at
+		// designer was specified.
+		return JasperFillManager.fillReport(report, parameters, new JREmptyDataSource());
 	}
 
 }

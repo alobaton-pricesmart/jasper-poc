@@ -25,8 +25,8 @@ public class JasperExporter {
 	/**
 	 * Export to PDF.
 	 * 
-	 * @param filename The filename
-	 * @param content  The file content
+	 * @param content      The file content
+	 * @param outputStream Output stream
 	 * @throws IOException
 	 * @throws JRException
 	 */
