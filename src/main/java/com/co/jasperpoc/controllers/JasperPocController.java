@@ -37,4 +37,11 @@ public class JasperPocController {
 
 		exporter.exportPDF(content, response.getOutputStream());
 	}
+
+	@RequestMapping("/dynamic/{name}")
+	public void dynamic(@PathVariable String name, HttpServletResponse response) throws JRException, IOException {
+		JasperPrint content = service.dynamic(name);
+
+		exporter.exportPDF(content, response.getOutputStream());
+	}
 }
