@@ -9,8 +9,10 @@ In order to start the POC use:
 ```bash
 $ git clone https://github.com/alobaton/jasper-poc.git
 
-$ cd jboss-poc
+$ cd jasper-poc
 $ mvn clean install
+
+$ mvn spring-boot:run
 ```
 
 ## Contributors
